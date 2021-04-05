@@ -1,9 +1,9 @@
-# End-to-end Bedrock tutorial in Google Cloud
+# End-to-end Bedrock tutorial in AWS
 
 This example demonstrates how to use Bedrock to preprocess data, train a model and create a HTTPS endpoint for serving. This example complements [Bedrock documentation](https://docs.basis-ai.com/guides/quickstart).
 
 This example uses sample customer churn data. The code shows how to
-- read data from GCS bucket
+- read data from S3 bucket
 - preprocess the data and generate features
 - train a LightGBM classifier model
 - serve the model as an endpoint
@@ -16,7 +16,7 @@ See [notebook](./doc/churn_prediction.ipynb)
 
 ## Goals
 At the end of the tutorial, the user will be able to
-- set up a training pipeline in Bedrock
+- set up a Bedrock training pipeline in AWS
 - monitor the training
 - deploy a model endpoint in HTTPS
 - query the endpoint

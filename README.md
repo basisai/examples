@@ -7,10 +7,19 @@ This repository is home to the following types of examples:
 
 ## End-to-end
 
-### [Binary class](./binary_class)
+### [Binary class GCP](./binary_class_gcp)
 
 This example covers the following concepts:
-1. Set up a training pipeline in Bedrock
+1. Set up a Bedrock training pipeline in Google Cloud
+2. Monitor the training
+3. Deploy a model endpoint in HTTPS
+4. Query the endpoint
+5. Monitor the endpoint
+
+### [Binary class AWS](./binary_class_aws)
+
+This example covers the following concepts:
+1. Set up a Bedrock training pipeline in AWS
 2. Monitor the training
 3. Deploy a model endpoint in HTTPS
 4. Query the endpoint
@@ -36,6 +45,13 @@ This example covers the following concepts:
 
 ### [Batch scoring pipeline](./batch_score)
 
-This example covers the following concepts:
-1. Set up a batch scoring pipeline in Bedrock
+This example covecrs the following concepts:
+1. Set up a Bedrock batch scoring pipeline in Google Cloud
 2. Save the output in Google BigQuery
+
+### [Serve with GRPC](./grpc_serve)
+
+This example covecrs the following concepts:
+1. Deploy a model endpoint in GRPC
+2. Query the endpoint
+3. Monitor the endpoint

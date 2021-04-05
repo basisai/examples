@@ -8,4 +8,4 @@ At the end of the tutorial, the user will be able to
 - save the output in Google BigQuery
 
 ## Prerequsites
-Train a model with the training pipeline from this [end-to-end example](../binary_class))
+Train a model with the training pipeline from this [end-to-end example](../binary_class)
