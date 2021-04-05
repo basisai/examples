@@ -1,0 +1,4 @@
+bdrk[analyzer,model-monitoring]==0.7.2
+seaborn
+lightgbm
+tensorflow
