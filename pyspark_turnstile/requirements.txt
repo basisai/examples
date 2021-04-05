@@ -1,0 +1,4 @@
+pandas==1.2.2
+pyspark==2.4.4
+gcsfs==0.6.1
+google-cloud==0.34.0

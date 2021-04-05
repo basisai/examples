@@ -2,7 +2,7 @@
 
 This example demonstrates how you can use Bedrock to preprocess data, train a model and create a HTTPS endpoint for serving. This example complements [Bedrock documentation](https://docs.basis-ai.com/guides/quickstart).
 
-This example will use sample customer churn data. The code shows how to
+This example uses sample customer churn data. The code shows how to
 - read data from GCS bucket
 - preprocess the data and generate features
 - train a LightGBM classifier model
@@ -15,7 +15,7 @@ See [notebook](./doc/churn_prediction.ipynb)
 ![flowchart](./doc/flow.png)
 
 ## Goals
-At the of the tutorial, the user will be able to
+At the end of the tutorial, the user will be able to
 - set up pipelines in Bedrock
 - monitor the training
 - deploy a model endpoint in HTTPS

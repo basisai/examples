@@ -6,19 +6,20 @@ from sklearn import metrics
 
 
 def lgb_roc_auc_score(y_true, y_pred):
+    """roc_auc_score wrapper."""
     return "roc_auc", metrics.roc_auc_score(y_true, y_pred), True
 
 
 def print_results(actual, probs):
+    """Classification result summary."""
     preds = (probs > 0.5).astype(int)
     print("Confusion matrix:")
     print(metrics.confusion_matrix(actual, preds), "\n")
     print(metrics.classification_report(actual, preds))
 
 
-# ROC(tpr-fpr) curve
 def plot_roc_curve(actual, pred, ax=None):
-    """Plot ROC."""
+    """Plot ROC curve."""
     fpr, tpr, _ = metrics.roc_curve(actual, pred)
 
     if ax is None:
@@ -35,9 +36,8 @@ def plot_roc_curve(actual, pred, ax=None):
     return ax
 
 
-# Precision-recall curve
 def plot_pr_curve(actual, pred, ax=None):
-    """Plot PR curve."""
+    """Plot precision-recall curve."""
     precision, recall, _ = metrics.precision_recall_curve(actual, pred)
 
     if ax is None:
