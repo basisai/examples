@@ -38,6 +38,12 @@ This example covers the following concepts:
 
 ## Component
 
+### [Miniconda](./miniconda)
+This example covers the following concepts:
+1. Install conda packaages
+2. Activate a conda environment on bedrock
+
+
 ### [PySpark step](./pyspark_turnstile)
 
 This example covers the following concepts:
