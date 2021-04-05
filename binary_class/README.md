@@ -1,6 +1,6 @@
 # End-to-end Bedrock tutorial in Google Cloud
 
-This example demonstrates how you can use Bedrock to preprocess data, train a model and create a HTTPS endpoint for serving. This example complements [Bedrock documentation](https://docs.basis-ai.com/guides/quickstart).
+This example demonstrates how to use Bedrock to preprocess data, train a model and create a HTTPS endpoint for serving. This example complements [Bedrock documentation](https://docs.basis-ai.com/guides/quickstart).
 
 This example uses sample customer churn data. The code shows how to
 - read data from GCS bucket
@@ -16,7 +16,7 @@ See [notebook](./doc/churn_prediction.ipynb)
 
 ## Goals
 At the end of the tutorial, the user will be able to
-- set up pipelines in Bedrock
+- set up a training pipeline in Bedrock
 - monitor the training
 - deploy a model endpoint in HTTPS
 - query the endpoint

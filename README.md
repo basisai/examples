@@ -10,7 +10,7 @@ This repository is home to the following types of examples:
 ### [Binary class](./binary_class)
 
 This example covers the following concepts:
-1. Set up pipelines in Bedrock
+1. Set up a training pipeline in Bedrock
 2. Monitor the training
 3. Deploy a model endpoint in HTTPS
 4. Query the endpoint
@@ -32,4 +32,10 @@ This example covers the following concepts:
 ### [PySpark step](./pyspark_turnstile)
 
 This example covers the following concepts:
-1. Write PySpark step in `bedrock.hcl` 
+1. Write PySpark step in `bedrock.hcl`
+
+### [Batch scoring pipeline](./batch_score)
+
+This example covers the following concepts:
+1. Set up a batch scoring pipeline in Bedrock
+2. Save the output in Google BigQuery
