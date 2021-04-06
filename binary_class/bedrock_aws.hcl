@@ -5,7 +5,7 @@ train {
         image = "basisai/workload-standard:v0.2.2"
         install = [
             "pip3 install --upgrade pip",
-            "pip3 install -r requirements.txt",
+            "pip3 install -r requirements-aws.txt",
         ]
         script = [
             {spark-submit {
@@ -23,9 +23,6 @@ train {
                     spark.hadoop.fs.s3a.impl = "org.apache.hadoop.fs.s3a.S3AFileSystem"
                     spark.hadoop.fs.s3a.endpoint = "s3.ap-southeast-1.amazonaws.com"
                 }
-                // to be passed in as --key=value
-                settings {
-                }
             }}
         ]
         resources {
@@ -38,7 +35,7 @@ train {
         image = "basisai/workload-standard:v0.2.2"
         install = [
             "pip3 install --upgrade pip",
-            "pip3 install -r requirements.txt",
+            "pip3 install -r requirements-aws.txt",
         ]
         script = [
             {spark-submit {
@@ -69,7 +66,7 @@ train {
         image = "basisai/workload-standard:v0.2.2"
         install = [
             "pip3 install --upgrade pip",
-            "pip3 install -r requirements.txt",
+            "pip3 install -r requirements-aws.txt",
         ]
         script = [{sh = ["python3 train.py"]}]
         resources {

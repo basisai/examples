@@ -7,17 +7,9 @@ This repository is home to the following types of examples:
 
 ## End-to-end
 
-### [Binary class GCP](./binary_class_gcp)
+### [Binary class](./binary_class)
 This example covers the following concepts:
-1. Set up a Bedrock training pipeline in Google Cloud
-2. Monitor the training
-3. Deploy a model endpoint in HTTPS
-4. Query the endpoint
-5. Monitor the endpoint
-
-### [Binary class AWS](./binary_class_aws)
-This example covers the following concepts:
-1. Set up a Bedrock training pipeline in AWS
+1. Set up a Bedrock training pipeline, either on Google Cloud or AWS
 2. Monitor the training
 3. Deploy a model endpoint in HTTPS
 4. Query the endpoint
@@ -43,13 +35,13 @@ This example covers the following concepts:
 
 ### [PySpark step](./pyspark_turnstile)
 This example covers the following concepts:
-1. Write PySpark step in `bedrock.hcl`
+1. Write PySpark step in hcl file
 
 ### [Batch scoring pipeline](./batch_score)
 This example covecrs the following concepts:
-1. Set up a Bedrock batch scoring pipeline in Google Cloud
+1. Set up a Bedrock batch scoring pipeline on Google Cloud
 2. Save the output in Google BigQuery
 
 ### [Serve with gRPC](./grpc_serve)
 This example covers the following concepts:
-1. Deploy a gRPC endpoint in Google Cloud
+1. Deploy a gRPC endpoint on Google Cloud
