@@ -8,16 +8,14 @@ This repository is home to the following types of examples:
 ## End-to-end
 
 ### [Binary class](./binary_class)
-
 This example covers the following concepts:
-1. Set up pipelines in Bedrock
+1. Set up a Bedrock training pipeline, either on Google Cloud or AWS
 2. Monitor the training
 3. Deploy a model endpoint in HTTPS
 4. Query the endpoint
 5. Monitor the endpoint
 
 ### [Multiclass](./multiclass)
-
 This example covers the following concepts:
 1. Train a multiclass classification machine learning model
 2. Log metrics for multiclass classfication
@@ -27,6 +25,7 @@ This example covers the following concepts:
 6. Log model explainabilty and fairness for multiclass
 7. Serving code for multiclass classification using bedrock express
 
+
 ## Component
 
 ### [Miniconda](./miniconda)
@@ -34,8 +33,15 @@ This example covers the following concepts:
 1. Install conda packaages
 2. Activate a conda environment on bedrock
 
-
 ### [PySpark step](./pyspark_turnstile)
-
 This example covers the following concepts:
-1. Write PySpark step in `bedrock.hcl` 
+1. Write PySpark step in hcl file
+
+### [Batch scoring pipeline](./batch_score)
+This example covecrs the following concepts:
+1. Set up a Bedrock batch scoring pipeline on Google Cloud
+2. Save the output in Google BigQuery
+
+### [Serve with gRPC](./grpc_serve)
+This example covers the following concepts:
+1. Deploy a gRPC endpoint on Google Cloud
