@@ -1,8 +1,8 @@
 bdrk[model-monitoring,analyzer]>=0.7.2
 numpy==1.20.1
 pandas==1.2.2
-lightgbm==2.3.1
+lightgbm==3.1.1
 scikit-learn==0.24.1
 pyspark==2.4.4
 fastparquet==0.5.0
-s3fs==0.4.2
+s3fs==0.6.0
