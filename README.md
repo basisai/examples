@@ -6,7 +6,7 @@ This repository is home to the following types of examples:
 * [Component](#component)
 
 
-A copy of the hcl file template is also provided as `bedrock.hcl.tmpl`.
+A copy of the hcl template is also provided as `bedrock.hcl.tmpl`.
 
 ## End-to-end
 

@@ -35,4 +35,4 @@ if __name__ == "__main__":
         time.sleep(np.random.randint(50, 70) / 60 * 2.5)
 
     ttaken = time.time() - start
-    print(f"Total Time taken = {ttaken:.0f}s, Rate = {num_queries / ttaken:.3f} queries/s")
+    print(f"Total time taken = {ttaken:.0f}s, Rate = {num_queries / ttaken:.3f} queries/s")
