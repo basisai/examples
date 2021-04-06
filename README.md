@@ -5,6 +5,9 @@ This repository is home to the following types of examples:
 * [End-to-end](#end-to-end)
 * [Component](#component)
 
+
+A copy of the hcl file template is also provided as `bedrock.hcl.tmpl`.
+
 ## End-to-end
 
 ### [Binary class](./binary_class)
@@ -14,6 +17,13 @@ This example covers the following concepts:
 3. Deploy a model endpoint in HTTPS
 4. Query the endpoint
 5. Monitor the endpoint
+
+### [Credit risk](./credit_risk)
+This example covers the following concepts:
+1. Set up a Bedrock training pipeline, either on Google Cloud or AWS
+2. Monitor the training
+3. Deploy a model endpoint in HTTPS
+4. Query the endpoint
 
 ### [Multiclass](./multiclass)
 This example covers the following concepts:
