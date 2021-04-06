@@ -16,14 +16,16 @@ This example covers the following concepts:
 2. Monitor the training
 3. Deploy a model endpoint in HTTPS
 4. Query the endpoint
-5. Monitor the endpoint
+5. Monitor the endpoint API metrics
 
 ### [Credit risk](./credit_risk)
 This example covers the following concepts:
-1. Set up a Bedrock training pipeline, either on Google Cloud or AWS
-2. Monitor the training
-3. Deploy a model endpoint in HTTPS
-4. Query the endpoint
+1. Set up a Bedrock training pipeline
+2. Log training-time feature and inference distributions
+3. Log model explainability and fairness metrics
+4. Check model explainability and fairness from Bedrock web UI
+5. Deploy a model endpoint in HTTPS with logging feature and inference distributions
+6. Monitor the endpoint by simulating a query stream
 
 ### [Multiclass](./multiclass)
 This example covers the following concepts:
