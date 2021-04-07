@@ -9,7 +9,7 @@ import botocore
 
 def s3_list_blobs(bucket_name, prefix):
     """List blob paths in prefix folder.
-    
+
     Args:
         bucket_name (str)
         prefix (str)
@@ -24,7 +24,7 @@ def s3_list_blobs(bucket_name, prefix):
 
 def s3_download_file(bucket_name, origin_blob_path, dest_filename):
     """Download blob from S3 bucket.
-    
+
     Args:
         bucket_name (str)
         origin_blob_path (str)
@@ -74,7 +74,7 @@ def s3_get_blob(bucket_name, blob_path):
 
 def s3_txt_read(bucket_name, blob_path):
     """Load text file from S3 bucket.
-    
+
     Args:
         bucket_name (str)
         blob_path (str)
@@ -89,7 +89,7 @@ def s3_txt_read(bucket_name, blob_path):
 
 def s3_imread(bucket_name, blob_path):
     """Load image from S3 as array.
-    
+
     Args:
         bucket_name (str)
         blob_path (str)
@@ -108,7 +108,7 @@ def s3_imread(bucket_name, blob_path):
 
 def s3_buffer_read(bucket_name, blob_path):
     """Load file from S3 bucket as buffer.
-    
+
     Args:
         bucket_name (str)
         blob_path (str)
