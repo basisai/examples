@@ -5,8 +5,8 @@ This repository is home to the following types of examples:
 * [End-to-end](#end-to-end)
 * [Component](#component)
 
-
 A copy of the hcl template is also provided as `bedrock.hcl.tmpl`.
+
 
 ## End-to-end
 
@@ -36,6 +36,12 @@ This example covers the following concepts:
 5. Log predictions for multiclass classification
 6. Log model explainabilty and fairness for multiclass
 7. Serving code for multiclass classification using bedrock express
+
+### [yolov5](./yolov5_shellfish)
+This example covers the following concepts:
+1. Train a model with GPU on Bedrock
+2. Deploy a model endpoint
+3. Deploy a Streamlit app
 
 
 ## Component

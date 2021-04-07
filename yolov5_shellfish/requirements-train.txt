@@ -1,0 +1,15 @@
+bdrk==0.3.2
+boto3==1.15.9
+numpy==1.18.5
+opencv-python-headless==4.4.0.44
+pandas==1.0.3
+s3fs==0.3.5
+Pillow>=8.1.1
+PyYAML>=5.3
+scipy>=1.4.1
+matplotlib==3.3.0
+tensorboard>=2.2
+tqdm>=4.41.0
+--find-links https://download.pytorch.org/whl/torch_stable.html
+torch==1.6.0+cu101
+torchvision==0.7.0+cu101
