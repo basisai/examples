@@ -20,7 +20,7 @@ At the end of the tutorial, the user will be able to
 - monitor the training
 - deploy a model endpoint in HTTPS
 - query the endpoint
-- monitor the endpoint
+- monitor the endpoint API metrics
 
 ## Run on Bedrock
 Just follow the Bedrock [quickstart guide](https://docs.basis-ai.com/guides/quickstart). You can either test on Google Cloud or AWS by selecting the hcl file in Bedrock web UI

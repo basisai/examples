@@ -5,6 +5,9 @@ This repository is home to the following types of examples:
 * [End-to-end](#end-to-end)
 * [Component](#component)
 
+A copy of the hcl template is also provided as `bedrock.hcl.tmpl`.
+
+
 ## End-to-end
 
 ### [Binary class](./binary_class)
@@ -13,7 +16,16 @@ This example covers the following concepts:
 2. Monitor the training
 3. Deploy a model endpoint in HTTPS
 4. Query the endpoint
-5. Monitor the endpoint
+5. Monitor the endpoint API metrics
+
+### [Credit risk](./credit_risk)
+This example covers the following concepts:
+1. Set up a Bedrock training pipeline
+2. Log training-time feature and inference distributions
+3. Log model explainability and fairness metrics
+4. Check model explainability and fairness from Bedrock web UI
+5. Deploy a model endpoint in HTTPS with logging feature and inference distributions
+6. Monitor the endpoint by simulating a query stream
 
 ### [Multiclass](./multiclass)
 This example covers the following concepts:
@@ -24,6 +36,12 @@ This example covers the following concepts:
 5. Log predictions for multiclass classification
 6. Log model explainabilty and fairness for multiclass
 7. Serving code for multiclass classification using bedrock express
+
+### [yolov5](./yolov5_shellfish)
+This example covers the following concepts:
+1. Train a model with GPU on Bedrock
+2. Deploy a model endpoint
+3. Deploy a Streamlit app
 
 
 ## Component
