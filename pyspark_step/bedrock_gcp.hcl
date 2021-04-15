@@ -5,12 +5,11 @@ train {
         image = "basisai/workload-standard:v0.2.2"
         install = [
             "pip3 install --upgrade pip",
-            "pip3 install -r requirements.txt",
+            "pip3 install -r requirements-gcp.txt",
         ]
         script = [
             {spark-submit {
                 script = "process.py"
-                // to be passed in as --conf key=value
                 conf {
                     spark.kubernetes.container.image = "basisai/workload-standard:v0.2.2"
                     spark.kubernetes.pyspark.pythonVersion = "3"
@@ -36,7 +35,8 @@ train {
     }
 
     parameters {
-        RAW_INPUT_DATA = "gs://bedrock-sample/mta-turnstile"
-        OUTPUT_DATA = ""gs://span-temp-production/ts_daily_traffic.csv"
+        RAW_SUBSCRIBERS_DATA = "gs://bedrock-sample/churn_data/subscribers.gz.parquet"
+        RAW_CALLS_DATA = "gs://bedrock-sample/churn_data/all_calls.gz.parquet"
+        PROCESSED_DATA = "gs://span-temp-production/churn_data/processed"
     }
 }

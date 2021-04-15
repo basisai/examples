@@ -5,7 +5,8 @@ This repository is home to the following types of examples:
 * [End-to-end](#end-to-end)
 * [Component](#component)
 
-A copy of the hcl template is provided as [`bedrock.hcl.tmpl`](./bedrock.hcl.tmpl).
+### hcl template
+A copy of the [hcl file](./bedrock.hcl.tmpl) is provided as a template for your reference.
 
 
 ## End-to-end
@@ -51,9 +52,9 @@ This example covers the following concepts:
 1. Install conda packaages
 2. Activate a conda environment on bedrock
 
-### [PySpark step](./pyspark_turnstile)
+### [PySpark step](./pyspark_step)
 This example covers the following concepts:
-1. Write PySpark step in hcl file
+1. Write hcl with Spark configuration
 
 ### [Use GPU](./gpu)
 This example covers the following concepts:
@@ -67,3 +68,7 @@ This example covecrs the following concepts:
 ### [Serve with gRPC](./grpc_serve)
 This example covers the following concepts:
 1. Deploy a gRPC endpoint on Google Cloud
+
+
+## Documentation
+Refer to the [documentation](https://docs.basis-ai.com/) for more details.
