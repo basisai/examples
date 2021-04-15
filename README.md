@@ -5,7 +5,7 @@ This repository is home to the following types of examples:
 * [End-to-end](#end-to-end)
 * [Component](#component)
 
-A copy of the hcl template is also provided as `bedrock.hcl.tmpl`.
+A copy of the hcl template is provided as [`bedrock.hcl.tmpl`](./bedrock.hcl.tmpl).
 
 
 ## End-to-end
@@ -54,6 +54,10 @@ This example covers the following concepts:
 ### [PySpark step](./pyspark_turnstile)
 This example covers the following concepts:
 1. Write PySpark step in hcl file
+
+### [Use GPU](./gpu)
+This example covers the following concepts:
+1. Deploy a GPU instance
 
 ### [Batch scoring pipeline](./batch_score)
 This example covecrs the following concepts:
