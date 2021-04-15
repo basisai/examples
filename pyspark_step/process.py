@@ -36,10 +36,15 @@ def preprocess_subscriber(spark):
 
 def main():
     """Preprocess data"""
-    print("\tPreprocessing")
     with SparkSession.builder.appName("Preprocessing").getOrCreate() as spark:
         spark.sparkContext.setLogLevel("FATAL")
+
+        print("\nProcessing")
         preprocessed_df = preprocess_subscriber(spark)
+        preprocessed_df.cache()
+        print(f"\n\tNumber of rows = {preprocessed_df.count()}")
+
+        print("\nSaving")
         preprocessed_df.repartition(1).write.mode("overwrite").parquet(PROCESSED_DATA)
 
 
