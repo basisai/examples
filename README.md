@@ -62,8 +62,7 @@ This example covers the following concepts:
 
 ### [Batch scoring pipeline](./batch_score)
 This example covecrs the following concepts:
-1. Set up a Bedrock batch scoring pipeline on Google Cloud
-2. Save the output in Google BigQuery
+1. Set up a Bedrock batch scoring pipeline on AWS
 
 ### [Serve with gRPC](./grpc_serve)
 This example covers the following concepts:
