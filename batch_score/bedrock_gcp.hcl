@@ -1,15 +1,11 @@
 version = "1.0"
 
-/*
-Batch score stanza
-Similar in style as Train stanza
-*/
 batch_score {
     step preprocess {
         image = "basisai/workload-standard:v0.2.2"
         install = [
             "pip3 install --upgrade pip",
-            "pip3 install -r requirements.txt",
+            "pip3 install -r requirements-gcp.txt",
         ]
         script = [
             {spark-submit {
@@ -39,7 +35,7 @@ batch_score {
         image = "basisai/workload-standard:v0.2.2"
         install = [
             "pip3 install --upgrade pip",
-            "pip3 install -r requirements.txt",
+            "pip3 install -r requirements-gcp.txt",
         ]
         script = [
             {spark-submit {
@@ -70,8 +66,7 @@ batch_score {
         image = "basisai/workload-standard:v0.2.2"
         install = [
             "pip3 install --upgrade pip",
-            "pip3 install -r requirements.txt",
-            "pip3 install pandas-gbq",
+            "pip3 install -r requirements-gcp.txt",
         ]
         script = [{sh = ["python3 batch_score.py"]}]
         resources {
@@ -87,9 +82,7 @@ batch_score {
         TEMP_DATA_BUCKET = "gs://span-temp-production/"
         PREPROCESSED_DATA = "churn_data/preprocessed"
         FEATURES_DATA = "churn_data/features.csv"
-        BIGQUERY_PROJECT = "span-production"
-        BIGQUERY_DATASET = "churn"
-        DEST_SUBSCRIBER_SCORE_TABLE = "subscriber_score"
+        SUBSCRIBER_SCORE_DATA = "churn_data/subscriber_score.csv"
         OUTPUT_MODEL_NAME = "lgb_model.pkl"
     }
 }

@@ -11,9 +11,6 @@ This example uses sample customer churn data. The code shows how to
 ### Data exploration and Model prototyping
 See [notebook](./doc/churn_prediction.ipynb)
 
-### Data processing and model training flowchart
-![flowchart](./doc/flow.png)
-
 ## Goals
 At the end of the tutorial, the user will be able to
 - set up a Bedrock training pipeline
@@ -26,6 +23,7 @@ At the end of the tutorial, the user will be able to
 Just follow the Bedrock [quickstart guide](https://docs.basis-ai.com/guides/quickstart). You can either test on Google Cloud or AWS by selecting the hcl file in Bedrock web UI
 - `bedrock_gcp.hcl`
 - `bedrock_aws.hcl`
+
 We have already prepared the data on GCS and S3 so that you do not have to upload any.
 
 ## Test your endpoint
