@@ -9,7 +9,7 @@ class TextDataset(Dataset):
         self.labels = labels
         self.tokenizer = tokenizer
         self.max_len = max_len
-        
+
     def __getitem__(self, index):
         sentence = self.data[index]
         inputs = self.tokenizer.encode_plus(
@@ -29,6 +29,6 @@ class TextDataset(Dataset):
         if self.labels is not None:
             output["targets"] = torch.tensor(self.labels[index], dtype=torch.long)
         return output
-    
+
     def __len__(self):
         return self.len

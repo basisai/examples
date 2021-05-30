@@ -39,7 +39,7 @@ def train_fn(cfg, model, train_loader, valid_loader, device):
     optimizer = torch.optim.Adam(model.parameters(), lr=cfg.lr)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
         optimizer, "min", factor=0.5, patience=2, verbose=True, eps=1e-6)
-    
+
     best_loss = np.inf
     counter = 0
 

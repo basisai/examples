@@ -47,11 +47,10 @@ def nlp_xai(request_json):
         pred = outputs[0]
         return pred[:, 1]
 
-
     def tokenize(sentence):
-        ref_token_id = TOKENIZER.pad_token_id  # token used for generating token reference
-        sep_token_id = TOKENIZER.sep_token_id  # token used as a separator between question and text and it is also added to the end of the text.
-        cls_token_id = TOKENIZER.cls_token_id  # token used for prepending to the concatenated question-text word sequence
+        ref_token_id = TOKENIZER.pad_token_id
+        sep_token_id = TOKENIZER.sep_token_id
+        cls_token_id = TOKENIZER.cls_token_id
 
         inputs = TOKENIZER.encode_plus(
             sentence,
@@ -71,8 +70,7 @@ def nlp_xai(request_json):
         mask = torch.tensor([inputs["attention_mask"]], dtype=torch.long)
         sent_len = sum(inputs["attention_mask"])
         tokens = TOKENIZER.convert_ids_to_tokens(inputs["input_ids"][1:sent_len-1])
-        return input_ids, ref_input_ids, mask, sent_len, tokens 
-
+        return input_ids, ref_input_ids, mask, sent_len, tokens
 
     attributes = list()
     for sentence in request_json["sentences"]:

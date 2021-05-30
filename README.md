@@ -68,7 +68,7 @@ This example covecrs the following concepts:
 This example covers the following concepts:
 1. Deploy a gRPC endpoint on Google Cloud
 
-### [NLP demo](./grpc_serve)
+### [NLP demo](./nlp)
 This example covers the following concepts:
 1. Fine-tune a pre-trained model
 2. use Captum for explainability

@@ -7,7 +7,7 @@ from transformers import DistilBertTokenizer, DistilBertForSequenceClassificatio
 
 def load_tokenizer():
     """Load tokenizer."""
-    return  DistilBertTokenizer.from_pretrained("distilbert-base-cased")
+    return DistilBertTokenizer.from_pretrained("distilbert-base-cased")
 
 
 def load_model(num_labels, finetuned_model_path=None, device=None):
