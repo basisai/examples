@@ -38,7 +38,7 @@ This example covers the following concepts:
 6. Log model explainabilty and fairness for multiclass
 7. Serving code for multiclass classification using bedrock express
 
-### [yolov5](./yolov5_shellfish)
+### [CV demo](./yolov5_shellfish)
 This example covers the following concepts:
 1. Train a model with GPU on Bedrock
 2. Deploy a model endpoint
@@ -67,6 +67,11 @@ This example covecrs the following concepts:
 ### [Serve with gRPC](./grpc_serve)
 This example covers the following concepts:
 1. Deploy a gRPC endpoint on Google Cloud
+
+### [NLP demo](./nlp)
+This example covers the following concepts:
+1. Fine-tune a pre-trained model
+2. use Captum for explainability
 
 
 ## Documentation
