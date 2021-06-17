@@ -23,6 +23,17 @@ OUTPUT_MODEL_PATH = env("OUTPUT_MODEL_PATH")
 TRAIN_DATA_PATH = env("TRAIN_DATA_PATH")
 TEST_DATA_PATH = env("TEST_DATA_PATH")
 
+CONFIG_FAI = {
+    "large_rings": {
+        "privileged_attribute_values": [1],
+        # privileged group name corresponding to values=[1]
+        "privileged_group_name": "Large",
+        "unprivileged_attribute_values": [0],
+        # unprivileged group name corresponding to values=[0]
+        "unprivileged_group_name": "Small",
+    }
+}
+
 
 def load_dataset(filepath: str,
                  target: str) -> Tuple[pd.core.frame.DataFrame,
@@ -39,6 +50,7 @@ def load_dataset(filepath: str,
     :rtype: tuple[pandas.core.frame.DataFrame, numpy.ndarray]
     """
     df = pd.read_csv(filepath).drop('Type', axis=1)  # Removes 'Type' column
+    df['large_rings'] = (df['Rings'] > 10).astype(int)
 
     # Ensure nothing missing
     original_len = len(df)
@@ -151,7 +163,7 @@ def main():
     collectors = [
         FeatureHistogramCollector(
             data=x_train.iteritems(),
-            discrete={6},  # Specify which column indices are discrete
+            discrete={6, 7},  # Specify which column indices are discrete
         ),
         InferenceHistogramCollector(data=train_predicted,
                                     is_discrete=False)
@@ -170,8 +182,16 @@ def main():
                       model_task=ModelTask.REGRESSION)
         .test_features(x_test)
     )
+
+    (
+        analyzer
+        .fairness_config(CONFIG_FAI)
+        .test_labels(y_test)
+        .test_inference(y_pred)
+    )
+
     analyzer.analyze()
-    print('Saved Shap model.')
+    print('Saved Shap model and XAI for regression.')
 
 
 if __name__ == '__main__':
