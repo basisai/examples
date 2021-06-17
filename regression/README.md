@@ -4,7 +4,7 @@ In this walkthrough, you will learn how to use bedrock to train a regression mod
 
 ## Goals
 
-* Demonstrate how to train a regression classification model on bedrock
+* Demonstrate how to train a regression model on bedrock
 * Demonstrate how to log metrics for regression using the bedrock client
 * Demonstrate how to customise logging of feature distributions
 * Demonstrate how to log model explanabilty and XAI for regression on bedrock
