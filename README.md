@@ -13,7 +13,7 @@ A copy of the [hcl file](./bedrock.hcl.tmpl) is provided as a template.
 
 ### [Regression](./regression)
 This example covers the following concepts:
-1. Train a regression classification model on bedrock
+1. Trains a regression model on bedrock
 2. Log metrics for regression using the bedrock client
 3. Customise logging of feature distributions
 4. Log model explanabilty and fairness for regression on bedrock
