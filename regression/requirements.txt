@@ -3,4 +3,4 @@ environs==9.3.2
 numpy==1.19.2
 pandas==1.2.3
 scikit-learn==0.24.1
-bdrk[model-monitoring,analyzer]==0.7.1
+bdrk[model-monitoring,analyzer]==0.8.0.dev1

@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 from sklearn import metrics
 
-from bedrock_client.bedrock.analyzer import ModelTypes
+from bedrock_client.bedrock.analyzer import ModelTask, ModelTypes
 from bedrock_client.bedrock.analyzer.model_analyzer import ModelAnalyzer
 from bedrock_client.bedrock.api import BedrockApi
 from bedrock_client.bedrock.metrics.collector import (
@@ -165,12 +165,10 @@ def main():
     # Train Shap model and calculate xafai metrics
     analyzer = (
         ModelAnalyzer(model,
-                      model_name='Catboost',
-                      model_type=ModelTypes.TREE)
-        .train_features(x_train)
+                      model_name='catboost_model',
+                      model_type=ModelTypes.TREE,
+                      model_task=ModelTask.REGRESSION)
         .test_features(x_test)
-        .test_labels(y_test)
-        .test_inference(y_pred)
     )
     analyzer.analyze()
     print('Saved Shap model.')
