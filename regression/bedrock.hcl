@@ -17,8 +17,8 @@ train {
 
     parameters {
         OUTPUT_MODEL_PATH = "/artefact/features_model.pkl"
-        TRAIN_DATA_PATH = "../multiclass/data/abalone_train.csv"
-        TEST_DATA_PATH = "../multiclass/data/abalone_test.csv"
+        TRAIN_DATA_PATH = "data/abalone_train.csv"
+        TEST_DATA_PATH = "data/abalone_test.csv"
     }
 }
 
