@@ -11,6 +11,14 @@ A copy of the [hcl file](./bedrock.hcl.tmpl) is provided as a template.
 
 ## End-to-end
 
+### [Regression](./regression)
+This example covers the following concepts:
+1. Train a regression classification model on bedrock
+2. Log metrics for regression using the bedrock client
+3. Customise logging of feature distributions
+4. Log model explanabilty and fairness for regression on bedrock
+5. Serve a trained regression model using bedrock express
+
 ### [Binary class](./binary_class)
 This example covers the following concepts:
 1. Set up a Bedrock training pipeline, either on Google Cloud or AWS
