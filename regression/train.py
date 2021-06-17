@@ -25,12 +25,10 @@ TEST_DATA_PATH = env("TEST_DATA_PATH")
 
 CONFIG_FAI = {
     "large_rings": {
-        "privileged_attribute_values": [1],
-        # privileged group name corresponding to values=[1]
-        "privileged_group_name": "Large",
-        "unprivileged_attribute_values": [0],
-        # unprivileged group name corresponding to values=[0]
-        "unprivileged_group_name": "Small",
+        "group_a": [1],
+        "group_a_name": "Large",
+        "group_b": [0],
+        "group_b_name": "Small"
     }
 }
 
