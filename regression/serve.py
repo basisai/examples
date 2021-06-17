@@ -37,7 +37,7 @@ class Model(BaseModel):
         features = json.loads(http_body)
         return [[float(features[name]) for name in self.feature_names]]
 
-    def predict(self, features: List[List[float]]) -> float:
+    def predict(self, features: List[List[float]]) -> List[float]:
         """
         Makes an inference.
 
@@ -46,4 +46,4 @@ class Model(BaseModel):
         :return: Return a float
         :rtype: float
         """
-        return self.model.predict(features)[0]
+        return [self.model.predict(features)[0]]
