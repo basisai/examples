@@ -79,7 +79,7 @@ This example covers the following concepts:
 ### [NLP demo](./nlp)
 This example covers the following concepts:
 1. Fine-tune a pre-trained model
-2. use Captum for explainability
+2. Use Captum for explainability
 
 
 ## Documentation
