@@ -1,7 +1,7 @@
 version = "1.0"
 
 serve {
-  image = "python:3.9"
+  image = "python:3.7"
   // The third line in "install" is to generate serve_pb2 and serve_pb2_grpc.
   // It requires protos/serve.proto.
   install = [

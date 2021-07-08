@@ -1,38 +1,28 @@
 version = "1.0"
 
 batch_score {
-  step preprocess {
+  step "preprocess" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
-    install = [
-      "pip3 install --upgrade pip",
-      "pip3 install -r requirements0-gcp.txt",
-    ]
+    install = []
     script = [
       {
-        spark-submit {
+        spark-submit = {
           script = "preprocess.py"
-          conf {
-            "spark.kubernetes.container.image"                      = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion"                = "3"
-            "spark.driver.memory"                                   = "4g"
-            "spark.driver.cores"                                    = "2"
-            "spark.executor.instances"                              = "2"
-            "spark.executor.memory"                                 = "4g"
-            "spark.executor.cores"                                  = "2"
-            "spark.memory.fraction"                                 = "0.5"
-            "spark.sql.parquet.compression.codec"                   = "gzip"
-            "spark.hadoop.fs.AbstractFileSystem.gs.impl"            = "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS"
-            "spark.hadoop.google.cloud.auth.service.account.enable" = "true"
+          conf = {
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
-      }}
+      } }
     ]
     resources {
-        cpu = "0.5"
-        memory = "1G"
+      cpu    = "0.5"
+      memory = "1G"
     }
   }
 
-  step generate_features {
+  step "generate_features" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -40,40 +30,32 @@ batch_score {
     ]
     script = [
       {
-        spark-submit {
+        spark-submit = {
           script = "generate_features.py"
-          conf {
-            "spark.kubernetes.container.image"                      = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion"                = "3"
-            "spark.driver.memory"                                   = "4g"
-            "spark.driver.cores"                                    = "2"
-            "spark.executor.instances"                              = "2"
-            "spark.executor.memory"                                 = "4g"
-            "spark.executor.cores"                                  = "2"
-            "spark.memory.fraction"                                 = "0.5"
-            "spark.sql.parquet.compression.codec"                   = "gzip"
-            "spark.hadoop.fs.AbstractFileSystem.gs.impl"            = "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS"
-            "spark.hadoop.google.cloud.auth.service.account.enable" = "true"
+          conf = {
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
-        }
-      }
+      } }
     ]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
     }
     depends_on = ["preprocess"]
   }
 
-  step batch_score {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+  step "batch_score" {
+    image = "python:3.7"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements-gcp.txt",
     ]
-    script = [{sh = ["python3 batch_score.py"]}]
+    script = [{ sh = ["python3 batch_score.py"] }]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
     }
     depends_on = ["generate_features"]

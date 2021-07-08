@@ -1,39 +1,32 @@
 version = "1.0"
 
 train {
-  step preprocess {
+  step "preprocess" {
+    # Same as spark.kubernetes.container.image
     image = "quay.io/basisai/workload-standard:v0.3.1"
-    install = [
-      "pip3 install --upgrade pip",
-      "pip3 install -r requirements-gcp.txt",
-    ]
+    install = []
     script = [
       {
-        spark-submit {
+        spark-submit = {
           script = "preprocess.py"
           conf = {
-            "spark.kubernetes.container.image"                      = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion"                = "3"
-            "spark.driver.memory"                                   = "4g"
-            "spark.driver.cores"                                    = "2"
-            "spark.executor.instances"                              = "2"
-            "spark.executor.memory"                                 = "4g"
-            "spark.executor.cores"                                  = "2"
-            "spark.memory.fraction"                                 = "0.5"
-            "spark.sql.parquet.compression.codec"                   = "gzip"
-            "spark.hadoop.fs.AbstractFileSystem.gs.impl"            = "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS"
-            "spark.hadoop.google.cloud.auth.service.account.enable" = "true"
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
         }
       }
     ]
     resources {
-      cpu = "0.5"
+      # Same as spark.driver.cores
+      cpu    = "0.5"
+      # Same as spark.driver.memory
       memory = "1G"
     }
   }
 
-  step generate_features {
+  step "generate_features" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -41,40 +34,33 @@ train {
     ]
     script = [
       {
-        spark-submit {
+        spark-submit = {
           script = "generate_features.py"
-          conf {
-            "spark.kubernetes.container.image"                      = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion"                = "3"
-            "spark.driver.memory"                                   = "4g"
-            "spark.driver.cores"                                    = "2"
-            "spark.executor.instances"                              = "2"
-            "spark.executor.memory"                                 = "4g"
-            "spark.executor.cores"                                  = "2"
-            "spark.memory.fraction"                                 = "0.5"
-            "spark.sql.parquet.compression.codec"                   = "gzip"
-            "spark.hadoop.fs.AbstractFileSystem.gs.impl"            = "com.google.cloud.hadoop.fs.gcs.GoogleHadoopFS"
-            "spark.hadoop.google.cloud.auth.service.account.enable" = "true"
+          conf = {
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
         }
       }
     ]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
     }
     depends_on = ["preprocess"]
   }
 
-  step train {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+  step "train" {
+    image = "python:3.7"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements-gcp.txt",
     ]
-    script = [{sh = ["python3 train.py"]}]
+    script = [{ sh = ["python3 train.py"] }]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
     }
     depends_on = ["generate_features"]
@@ -94,7 +80,7 @@ train {
 }
 
 serve {
-  image = "python:3.9"
+  image = "python:3.7"
   install = [
     "pip3 install --upgrade pip",
     "pip3 install -r requirements-serve.txt",
@@ -108,7 +94,7 @@ serve {
   ]
 
   parameters {
-      WORKERS                  = "2"
-      PROMETHEUS_MULTIPROC_DIR = "/tmp"
+    WORKERS                  = "2"
+    PROMETHEUS_MULTIPROC_DIR = "/tmp"
   }
 }

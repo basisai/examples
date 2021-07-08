@@ -2,33 +2,26 @@ version = "1.0"
 
 train {
   step "preprocess" {
+    # Same as spark.kubernetes.container.image
     image = "quay.io/basisai/workload-standard:v0.3.1"
-    install = [
-      "pip3 install --upgrade pip",
-      "pip3 install -r requirements-aws.txt",
-    ]
+    install = []
     script = [
       {
         spark-submit = {
           script = "preprocess.py"
           conf = {
-            "spark.kubernetes.container.image"       = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion" = "3"
-            "spark.driver.memory"                    = "4g"
-            "spark.driver.cores"                     = "2"
             "spark.executor.instances"               = "2"
             "spark.executor.memory"                  = "4g"
             "spark.executor.cores"                   = "2"
-            "spark.memory.fraction"                  = "0.5"
             "spark.sql.parquet.compression.codec"    = "gzip"
-            "spark.hadoop.fs.s3a.impl"               = "org.apache.hadoop.fs.s3a.S3AFileSystem"
-            "spark.hadoop.fs.s3a.endpoint"           = "s3.ap-southeast-1.amazonaws.com"
           }
         }
       }
     ]
     resources {
+      # Same as spark.driver.cores
       cpu    = "0.5"
+      # Same as spark.driver.memory
       memory = "1G"
     }
   }
@@ -44,17 +37,10 @@ train {
         spark-submit = {
           script = "generate_features.py"
           conf = {
-            "spark.kubernetes.container.image"       = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion" = "3"
-            "spark.driver.memory"                    = "4g"
-            "spark.driver.cores"                     = "2"
             "spark.executor.instances"               = "2"
             "spark.executor.memory"                  = "4g"
             "spark.executor.cores"                   = "2"
-            "spark.memory.fraction"                  = "0.5"
             "spark.sql.parquet.compression.codec"    = "gzip"
-            "spark.hadoop.fs.s3a.impl"               = "org.apache.hadoop.fs.s3a.S3AFileSystem"
-            "spark.hadoop.fs.s3a.endpoint"           = "s3.ap-southeast-1.amazonaws.com"
           }
         }
       }
@@ -67,7 +53,7 @@ train {
   }
 
   step "train" {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+    image = "python:3.7"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements-aws.txt",
@@ -94,7 +80,7 @@ train {
 }
 
 serve {
-  image = "python:3.9"
+  image = "python:3.7"
   install = [
     "pip3 install --upgrade pip",
     "pip3 install -r requirements-serve.txt",
@@ -102,7 +88,7 @@ serve {
   script = [
     {
       sh = [
-        "gunicorn --config gunicorn_config.py --bind=:$${BEDROCK_SERVER_PORT:-8080} --worker-class=gthread --workers=$${WORKERS} --timeout=300 --preload serve_http:app"
+        "gunicorn --config gunicorn_config.py --bind=:${BEDROCK_SERVER_PORT:-8080} --worker-class=gthread --workers=${WORKERS} --timeout=300 --preload serve_http:app"
       ]
     }
   ]
