@@ -19,7 +19,8 @@ Comprises the following:
 train {
   // We declare a step with a step name. For example, this step is named as "preprocess".
   // A step's name must be unique.
-  step preprocess {
+  step "preprocess" {
+    // Same as spark.kubernetes.container.image
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -34,17 +35,10 @@ train {
           script = "preprocess.py"
           // to be passed in as --conf key=value
           conf {
-            "spark.kubernetes.container.image" = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion" = "3"
-            "spark.driver.memory" = "4g"
-            "spark.driver.cores" = "2"
-            "spark.executor.instances" = "2"
-            "spark.executor.memory" = "4g"
-            "spark.executor.cores" = "2"
-            "spark.memory.fraction" = "0.5"
-            "spark.sql.parquet.compression.codec" = "gzip"
-            "spark.hadoop.fs.s3a.impl" = "org.apache.hadoop.fs.s3a.S3AFileSystem"
-            "spark.hadoop.fs.s3a.endpoint" = "s3.ap-southeast-1.amazonaws.com"
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
           // to be passed in as --key=value
           settings {
@@ -53,12 +47,14 @@ train {
       }
     ]
     resources {
-      cpu = "0.5"
+      // Same as spark.driver.cores
+      cpu    = "0.5"
+      // Same as spark.driver.memory
       memory = "1G"
     }
   }
 
-  step generate_features {
+  step "generate_features" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -69,39 +65,32 @@ train {
         spark-submit {
           script = "generate_features.py"
           conf {
-            "spark.kubernetes.container.image" = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion" = "3"
-            "spark.driver.memory" = "4g"
-            "spark.driver.cores" = "2"
-            "spark.executor.instances" = "2"
-            "spark.executor.memory" = "4g"
-            "spark.executor.cores" = "2"
-            "spark.memory.fraction" = "0.5"
-            "spark.sql.parquet.compression.codec" = "gzip"
-            "spark.hadoop.fs.s3a.impl" = "org.apache.hadoop.fs.s3a.S3AFileSystem"
-            "spark.hadoop.fs.s3a.endpoint" = "s3.ap-southeast-1.amazonaws.com"
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
         }
       }
     ]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
     }
     depends_on = ["preprocess"]
   }
 
-  step train {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+  step "train" {
+    image = "python:3.7"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements.txt",
     ]
-    script = [{sh = ["python3 train.py"]}]
+    script = [{ sh = ["python3 train.py"] }]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
-      // gpu = "1"  // uncomment this in order to use GPU. Only integer values are allowed.
+      // gpu    = "1"  // uncomment this in order to use GPU. Only integer values are allowed.
     }
     depends_on = ["generate_features"]
   }
@@ -133,7 +122,7 @@ Batch score stanza
 Similar in style as Train stanza
 */
 batch_score {
-  step preprocess {
+  step "preprocess" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -144,17 +133,10 @@ batch_score {
         spark-submit {
           script = "preprocess.py"
           conf {
-            "spark.kubernetes.container.image" = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion" = "3"
-            "spark.driver.memory" = "4g"
-            "spark.driver.cores" = "2"
-            "spark.executor.instances" = "2"
-            "spark.executor.memory" = "4g"
-            "spark.executor.cores" = "2"
-            "spark.memory.fraction" = "0.5"
-            "spark.sql.parquet.compression.codec" = "gzip"
-            "spark.hadoop.fs.s3a.impl" = "org.apache.hadoop.fs.s3a.S3AFileSystem"
-            "spark.hadoop.fs.s3a.endpoint" = "s3.ap-southeast-1.amazonaws.com"
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
         }
       }
@@ -165,7 +147,7 @@ batch_score {
     }
   }
 
-  step generate_features {
+  step "generate_features" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -176,37 +158,30 @@ batch_score {
         spark-submit {
           script = "generate_features.py"
           conf {
-            "spark.kubernetes.container.image" = "quay.io/basisai/workload-standard:v0.3.1"
-            "spark.kubernetes.pyspark.pythonVersion" = "3"
-            "spark.driver.memory" = "4g"
-            "spark.driver.cores" = "2"
-            "spark.executor.instances" = "2"
-            "spark.executor.memory" = "4g"
-            "spark.executor.cores" = "2"
-            "spark.memory.fraction" = "0.5"
-            "spark.sql.parquet.compression.codec" = "gzip"
-            "spark.hadoop.fs.s3a.impl" = "org.apache.hadoop.fs.s3a.S3AFileSystem"
-            "spark.hadoop.fs.s3a.endpoint" = "s3.ap-southeast-1.amazonaws.com"
+            "spark.executor.instances"               = "2"
+            "spark.executor.memory"                  = "4g"
+            "spark.executor.cores"                   = "2"
+            "spark.sql.parquet.compression.codec"    = "gzip"
           }
         }
       }
     ]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
     }
     depends_on = ["preprocess"]
   }
 
   step batch_score {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+    image = "python:3.7"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements.txt",
     ]
-    script = [{sh = ["python3 batch_score.py"]}]
+    script = [{ sh = ["python3 batch_score.py"] }]
     resources {
-      cpu = "0.5"
+      cpu    = "0.5"
       memory = "1G"
     }
     depends_on = ["generate_features"]
@@ -231,7 +206,7 @@ Only comprises the following:
 - [required] script: the command that calls the script
 */
 serve {
-  image = "python:3.9"
+  image = "python:3.7"
   install = [
     "pip3 install --upgrade pip",
     "pip3 install -r requirements-serve.txt",
@@ -245,6 +220,7 @@ serve {
   ]
 
   parameters {
-      WORKERS = "1"
+    WORKERS                  = "2"
+    PROMETHEUS_MULTIPROC_DIR = "/tmp"
   }
 }
