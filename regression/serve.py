@@ -8,7 +8,6 @@ from typing import AnyStr, BinaryIO, Dict, List, Optional
 from environs import Env
 from bdrk.model import BaseModel
 
-
 env = Env()
 OUTPUT_MODEL_NAME = env("OUTPUT_MODEL_PATH")
 
