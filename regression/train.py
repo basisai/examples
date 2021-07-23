@@ -1,22 +1,19 @@
 import joblib
-import logging
 from typing import Tuple
 
-from catboost import CatBoostRegressor
-from environs import Env
+import bdrk
 import numpy as np
 import pandas as pd
-from sklearn import metrics
-
-from bedrock_client.bedrock.analyzer import ModelTask, ModelTypes
-from bedrock_client.bedrock.analyzer.model_analyzer import ModelAnalyzer
-from bedrock_client.bedrock.api import BedrockApi
-from bedrock_client.bedrock.metrics.collector import (
+from bdrk.model_analyzer import ModelAnalyzer, ModelTask, ModelTypes
+from boxkite.monitoring.collector import (
     BaselineMetricCollector,
     FeatureHistogramCollector,
     InferenceHistogramCollector
 )
-from bedrock_client.bedrock.metrics.encoder import MetricEncoder
+from boxkite.monitoring.encoder import MetricEncoder
+from catboost import CatBoostRegressor
+from environs import Env
+from sklearn import metrics
 
 env = Env()
 OUTPUT_MODEL_PATH = env("OUTPUT_MODEL_PATH")
@@ -118,11 +115,13 @@ def compute_log_metrics(model: CatBoostRegressor,
           f"\tR2 regression score function = {r2_score:.4f}\n")
 
     # Bedrock Logger: captures model metrics
-    bedrock = BedrockApi(logging.getLogger(__name__))
-
-    bedrock.log_metric("MAE", mae)
-    bedrock.log_metric("MSE", mse)
-    bedrock.log_metric("R2", r2_score)
+    bdrk.log_metrics(
+        {
+            "MAE": mae,
+            "MSE": mse,
+            "R2": r2_score,
+        }
+    )
 
     return y_pred
 
@@ -193,4 +192,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    bdrk.init()
+    with bdrk.start_run():
+        main()

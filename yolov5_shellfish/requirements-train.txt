@@ -1,4 +1,4 @@
-bdrk==0.3.2
+bdrk==0.9.1
 boto3==1.15.9
 numpy==1.18.5
 opencv-python-headless==4.4.0.44

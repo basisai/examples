@@ -6,7 +6,7 @@ import json
 from typing import AnyStr, BinaryIO, Dict, List, Optional
 
 from environs import Env
-from bedrock_client.bedrock.model import BaseModel
+from bdrk.model import BaseModel
 
 
 env = Env()

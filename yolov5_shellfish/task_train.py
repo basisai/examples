@@ -1,13 +1,12 @@
 """
 Script to train model.
 """
-import logging
 import os
 import shutil
 import time
 
+import bdrk
 import torch
-from bedrock_client.bedrock.api import BedrockApi
 
 from train import set_params, trainer
 from utils_s3 import s3_download_file, s3_list_blobs
@@ -106,14 +105,17 @@ def log_metrics(run_dir):
     print(f"  val Classification = {val_cls:.6f}")
 
     # Log metrics
-    bedrock = BedrockApi(logging.getLogger(__name__))
-    bedrock.log_metric("Precision", precision)
-    bedrock.log_metric("Recall", recall)
-    bedrock.log_metric("mAP@0.5", map50)
-    bedrock.log_metric("mAP@0.5:0.95", map50_95)
-    bedrock.log_metric("val GIoU", val_giou)
-    bedrock.log_metric("val Objectness", val_obj)
-    bedrock.log_metric("val Classification", val_cls)
+    bdrk.log_metrics(
+        {
+            "Precision": precision,
+            "Recall": recall,
+            "mAP@0.5": map50,
+            "mAP@0.5:0.95": map50_95,
+            "val GIoU": val_giou,
+            "val Objectness": val_obj,
+            "val Classification": val_cls,
+        }
+    )
 
 
 def main():
@@ -159,4 +161,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    bdrk.init()
+    with bdrk.start_run():
+        main()
