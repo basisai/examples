@@ -1,24 +1,21 @@
 import joblib
-import logging
 from typing import Tuple
 
-from environs import Env
+import bdrk
 import numpy as np
 import pandas as pd
-from sklearn import metrics
-from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-
-from bedrock_client.bedrock.analyzer import ModelTypes
-from bedrock_client.bedrock.analyzer.model_analyzer import ModelAnalyzer
-from bedrock_client.bedrock.api import BedrockApi
-from bedrock_client.bedrock.metrics.collector import (
+from bdrk.model_analyzer import ModelAnalyzer, ModelTypes
+from boxkite.monitoring.collector import (
     BaselineMetricCollector,
     FeatureHistogramCollector,
     InferenceHistogramCollector
 )
-from bedrock_client.bedrock.metrics.encoder import MetricEncoder
+from boxkite.monitoring.encoder import MetricEncoder
+from environs import Env
+from sklearn import metrics
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 env = Env()
 OUTPUT_MODEL_PATH = env("OUTPUT_MODEL_PATH")
@@ -147,24 +144,25 @@ def compute_log_metrics(pipe: Pipeline,
           f"\tAverage precision (macro) = {avg_prc:.4f}")
 
     # Bedrock Logger: captures model metrics
-    bedrock = BedrockApi(logging.getLogger(__name__))
-
+    bdrk.log_metrics(
+        {
+            "Accuracy": acc,
+            "Precision (macro)": precision,
+            "Recall (macro)": recall,
+            "F1 Score (macro)": f1_score,
+            "ROC AUC (macro)": roc_auc,
+            "Avg precision (macro)": avg_prc,
+        }
+    )
     # `log_chart_data` assumes binary classification
     # For multiclass labels, we can use a "micro-average" by
     # quantifying score on all classes jointly
     # See https://scikit-learn.org/stable/auto_examples/model_selection/plot_precision_recall.html  # noqa: E501
     # This will allow us to use the same `log_chart_data` method
-    bedrock.log_chart_data(
+    bdrk.log_binary_classifier_metrics(
         y_test_onehot.ravel().astype(int).tolist(),  # list of int
         test_prob.ravel().astype(float).tolist()  # list of float
     )
-
-    bedrock.log_metric("Accuracy", acc)
-    bedrock.log_metric("Precision (macro)", precision)
-    bedrock.log_metric("Recall (macro)", recall)
-    bedrock.log_metric("F1 Score (macro)", f1_score)
-    bedrock.log_metric("ROC AUC (macro)", roc_auc)
-    bedrock.log_metric("Avg precision (macro)", avg_prc)
 
     return test_prob, test_pred
 
@@ -248,4 +246,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    bdrk.init()
+    with bdrk.start_run():
+        main()

@@ -1,7 +1,7 @@
 version = "1.0"
 
 train {
-  step train {
+  step "train" {
     image = "tensorflow/tensorflow:2.5.0-gpu"
     install = [
       "pip3 install --upgrade pip",
