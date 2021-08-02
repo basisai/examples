@@ -9,7 +9,7 @@ import bdrk
 import torch
 
 from train import set_params, trainer
-from utils_s3 import s3_download_file, s3_list_blobs
+from utils.s3 import s3_download_file, s3_list_blobs
 
 BUCKET_NAME = os.getenv("BUCKET_NAME")
 DATA_DIR = os.getenv("DATA_DIR")
