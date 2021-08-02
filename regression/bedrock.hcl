@@ -23,7 +23,7 @@ train {
 }
 
 serve {
-  image = "basisai/express-flask:v0.0.3"
+  image = "quay.io/basisai/express-flask:v0.0.7"
   install = [
     "pip install --upgrade pip",
     "pip install -r requirements.txt",
