@@ -14,6 +14,7 @@ Comprises the following:
 - [optional] install: the command to install any other packages not covered in the image
 - [required] script: the command that calls the script
 - [optional] resources: the computing resources to be allocated to this run step
+- [optional] retry: retry strategy to be used for this run step on failure
 - [optional] depends_on: a list of names of steps that this run step depends on
 */
 train {
@@ -56,6 +57,10 @@ train {
       cpu = "0.5"
       memory = "1G"
     }
+    retry {
+      // Limit is the maximum number of attempts when retrying a step (excludes initial attempt)
+      limit = "1"
+    }
   }
 
   step generate_features {
@@ -88,6 +93,9 @@ train {
       cpu = "0.5"
       memory = "1G"
     }
+    retry {
+      limit = "0"
+    }
     depends_on = ["preprocess"]
   }
 
@@ -102,6 +110,9 @@ train {
       cpu = "0.5"
       memory = "1G"
       // gpu = "1"  // uncomment this in order to use GPU. Only integer values are allowed.
+    }
+    retry {
+      limit = "3"
     }
     depends_on = ["generate_features"]
   }
@@ -163,6 +174,9 @@ batch_score {
       cpu = "0.5"
       memory = "1G"
     }
+    retry {
+      limit = "3"
+    }
   }
 
   step generate_features {
@@ -195,6 +209,9 @@ batch_score {
       cpu = "0.5"
       memory = "1G"
     }
+    retry {
+      limit = "1"
+    }
     depends_on = ["preprocess"]
   }
 
@@ -208,6 +225,9 @@ batch_score {
     resources {
       cpu = "0.5"
       memory = "1G"
+    }
+    retry {
+      limit = "3"
     }
     depends_on = ["generate_features"]
   }
