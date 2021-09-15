@@ -13,6 +13,9 @@ train {
       cpu = "4"
       memory = "4G"
     }
+    retry {
+      limit = "2"
+    }
   }
 
   parameters {

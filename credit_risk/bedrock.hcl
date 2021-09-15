@@ -1,7 +1,7 @@
 version = "1.0"
 
 train {
-  step features_trainer {
+  step "features_trainer" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -12,9 +12,12 @@ train {
       cpu = "2"
       memory = "12G"
     }
+    retry {
+      limit = "2"
+    }
   }
 
-  step train {
+  step "train" {
     image = "quay.io/basisai/workload-standard:v0.3.1"
     install = [
       "pip3 install --upgrade pip",
@@ -24,6 +27,9 @@ train {
     resources {
       cpu = "2"
       memory = "14G"
+    }
+    retry {
+      limit = "2"
     }
     depends_on = ["features_trainer"]
   }
