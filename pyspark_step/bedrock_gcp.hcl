@@ -22,7 +22,7 @@ train {
       memory = "1G"
     }
     retry {
-      limit = "2"
+      limit = 2
     }
   }
 

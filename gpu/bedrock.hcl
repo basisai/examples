@@ -14,7 +14,7 @@ train {
       gpu = "1"
     }
     retry {
-      limit = "2"
+      limit = 2
     }
   }
 

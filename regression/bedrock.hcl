@@ -14,7 +14,7 @@ train {
       memory = "4G"
     }
     retry {
-      limit = "2"
+      limit = 2
     }
   }
 

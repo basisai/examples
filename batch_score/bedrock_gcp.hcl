@@ -22,7 +22,7 @@ batch_score {
       memory = "1G"
     }
     retry {
-      limit = "2"
+      limit = 2
     }
   }
 
@@ -50,7 +50,7 @@ batch_score {
       memory = "1G"
     }
     retry {
-      limit = "2"
+      limit = 2
     }
     depends_on = ["preprocess"]
   }
@@ -67,7 +67,7 @@ batch_score {
       memory = "1G"
     }
     retry {
-      limit = "2"
+      limit = 2
     }
     depends_on = ["generate_features"]
   }
