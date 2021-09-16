@@ -13,6 +13,9 @@ train {
       memory = "14G"
       gpu = "1"
     }
+    retry {
+      limit = 2
+    }
   }
 
   parameters {
