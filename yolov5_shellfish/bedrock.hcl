@@ -2,19 +2,19 @@ version = "1.0"
 
 train {
   step "train" {
-    image = "tensorflow/tensorflow:2.5.0-gpu"
+    image = "tensorflow/tensorflow:2.3.1-gpu"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements-train.txt",
     ]
     script = [{sh = ["python3 task_train.py"]}]
     resources {
-      cpu = "2"
+      cpu    = "2"
       memory = "14G"
-      gpu = "1"
+      gpu    = "1"
     }
     retry {
-      limit = 2
+      limit = 1
     }
   }
 
@@ -28,7 +28,7 @@ train {
 }
 
 serve {
-  image = "python:3.9"
+  image = "python:3.7.9"
   install = [
     "pip3 install --upgrade pip",
     "pip3 install -r requirements-serve.txt",
@@ -42,6 +42,6 @@ serve {
   ]
 
   parameters {
-      WORKERS = "1"
+    WORKERS = "1"
   }
 }

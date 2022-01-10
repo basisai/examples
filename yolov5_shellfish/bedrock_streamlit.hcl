@@ -1,9 +1,10 @@
 version = "1.0"
 
 serve {
-  image = "python:3.9"
+  image = "python:3.7.9"
   install = [
-    "pip install -r requirements.txt"
+    "pip3 install --upgrade pip",
+    "pip3 install -r requirements.txt"
   ]
   script = [
     {
@@ -13,9 +14,4 @@ serve {
       ]
     }
   ]
-
-  parameters {
-    API = ""
-    DOMAIN = ""
-  }
 }
