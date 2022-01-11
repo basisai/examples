@@ -16,7 +16,7 @@ feature_cols = pickle.load(open("/artefact/feature_cols.pkl", "rb"))
 redis = pd.read_parquet("/artefact/test.gz.parquet")
 
 
-def read_redis_features(sk_id):
+def read_redis_features(sk_id: str) -> list:
     """Gets all the values from redis."""
     # Simulate querying redis
     row = redis.query(f"SK_ID_CURR == {sk_id}")
@@ -25,7 +25,7 @@ def read_redis_features(sk_id):
     return row[feature_cols]
 
 
-def predict_score(request_json):
+def predict_score(request_json: dict) -> float:
     """Predict function."""
     # Get features
     sk_id = request_json["sk_id"]
@@ -43,7 +43,7 @@ def predict_score(request_json):
         )
         return prob
 
-    return np.NaN
+    return np.nan
 
 
 # pylint: disable=invalid-name
@@ -52,8 +52,9 @@ app = Flask(__name__)
 
 @app.before_first_request
 def init_background_threads():
-    """Global objects with daemon threads will be stopped by gunicorn --preload flag.
-    So instantiate them here instead.
+    """
+    Global objects with daemon threads will be stopped by
+    gunicorn --preload flag. So instantiate them here instead.
     """
     current_app.monitor = ModelMonitoringService()
 
@@ -70,7 +71,7 @@ def get_metrics():
 
 
 @app.route("/", methods=["POST"])
-def get_prob():
+def get_prob() -> dict:
     """Returns probability."""
     return {"prob": predict_score(request.json)}
 

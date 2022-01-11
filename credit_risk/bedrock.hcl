@@ -9,11 +9,11 @@ train {
     ]
     script = [{sh = ["python3 task_features_trainer.py"]}]
     resources {
-      cpu = "2"
+      cpu    = "2"
       memory = "12G"
     }
     retry {
-      limit = 2
+      limit = 1
     }
   }
 
@@ -25,11 +25,11 @@ train {
     ]
     script = [{sh = ["python3 task_train.py"]}]
     resources {
-      cpu = "2"
+      cpu    = "2"
       memory = "14G"
     }
     retry {
-      limit = 2
+      limit = 1
     }
     depends_on = ["features_trainer"]
   }
@@ -44,7 +44,7 @@ train {
 }
 
 serve {
-  image = "python:3.9"
+  image = "python:3.7"
   install = [
     "pip3 install --upgrade pip",
     "pip3 install -r requirements-serve.txt",
@@ -59,5 +59,29 @@ serve {
 
   parameters {
     WORKERS = "1"
+  }
+}
+
+
+batch_score {
+  step "compute_shap" {
+    image = "quay.io/basisai/workload-standard:v0.3.1"
+    install = [
+      "pip3 install --upgrade pip",
+      "pip3 install -r requirements-train.txt",
+      "pip3 install shap==0.38.1",
+    ]
+    script = [{sh = ["python3 task_shap.py"]}]
+    resources {
+      cpu = "2"
+      memory = "14G"
+    }
+    retry {
+      limit = 1
+    }
+  }
+
+  parameters {
+    EXECUTION_DATE = ""
   }
 }

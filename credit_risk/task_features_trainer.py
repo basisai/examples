@@ -1,6 +1,9 @@
 """
 Script to generate features for training.
 """
+from datetime import datetime
+
+import bdrk
 from preprocess.application import application
 from preprocess.bureau_and_balance import bureau_and_balance
 from preprocess.previous_application import previous_application
@@ -12,7 +15,7 @@ from preprocess.utils import timer, get_execution_date, get_temp_bucket_prefix
 TMP_BUCKET = get_temp_bucket_prefix()
 
 
-def generate_features(execution_date):
+def generate_features(execution_date: datetime) -> None:
     """Generate features."""
     print("\nProcess application")
     df = application(execution_date)
@@ -48,20 +51,25 @@ def generate_features(execution_date):
         print("  Credit card balance df shape:", cc.shape)
         df = df.join(cc, how='left', on='SK_ID_CURR')
 
-    # [LightGBM] [Fatal] Do not support special JSON characters in feature name.
-    new_cols = ["".join(c if c.isalnum() else "_" for c in str(x)) for x in df.columns]
+    # [LightGBM] [Fatal] Do not support special JSON characters
+    # in feature name.
+    new_cols = [
+        "".join(c if c.isalnum() else "_" for c in str(x)) for x in df.columns
+    ]
     df.columns = new_cols
 
     print("\nSave train data")
     print("  Train data shape:", df.shape)
-    df.to_csv(TMP_BUCKET + "credit_train/train.csv", index=False)
+    df.to_csv(f"{TMP_BUCKET}/credit_train/train.csv", index=False)
 
 
-def main():
+def main() -> None:
     execution_date = get_execution_date()
     print(execution_date.strftime("\nExecution date is %Y-%m-%d"))
     generate_features(execution_date)
 
 
 if __name__ == "__main__":
-    main()
+    bdrk.init()
+    with bdrk.start_run():
+        main()
