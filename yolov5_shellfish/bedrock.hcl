@@ -2,7 +2,7 @@ version = "1.0"
 
 train {
   step "train" {
-    image = "tensorflow/tensorflow:2.3.1-gpu"
+    image = "tensorflow/tensorflow:2.7.0-gpu"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements-train.txt",
@@ -28,7 +28,7 @@ train {
 }
 
 serve {
-  image = "python:3.7.9"
+  image = "python:3.8"
   install = [
     "pip3 install --upgrade pip",
     "pip3 install -r requirements-serve.txt",

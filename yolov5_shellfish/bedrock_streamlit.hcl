@@ -1,7 +1,7 @@
 version = "1.0"
 
 serve {
-  image = "python:3.7.9"
+  image = "python:3.8"
   install = [
     "pip3 install --upgrade pip",
     "pip3 install -r requirements.txt"
