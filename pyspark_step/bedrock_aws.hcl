@@ -2,7 +2,7 @@ version = "1.0"
 
 train {
   step "process" {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+    image = "quay.io/basisai/workload-standard:v0.3.4"
     install = []
     script = [
       {

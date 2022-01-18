@@ -2,7 +2,7 @@ version = "1.0"
 
 batch_score {
   step "preprocess" {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+    image = "quay.io/basisai/workload-standard:v0.3.4"
     install = []
     script = [
       {
@@ -27,7 +27,7 @@ batch_score {
   }
 
   step "generate_features" {
-    image = "quay.io/basisai/workload-standard:v0.3.1"
+    image = "quay.io/basisai/workload-standard:v0.3.4"
     install = [
       "pip3 install --upgrade pip",
       "pip3 install -r requirements-gcp.txt",
